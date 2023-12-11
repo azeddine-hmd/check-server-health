@@ -3,6 +3,24 @@ import httpx
 
 app = FastAPI()
 
+up = {
+    "schemaVersion": 1,
+    "label": "uptime",
+    "message": "up",
+    "color": "brightgreen",
+    "style": "flat-square",
+    "cacheSeconds": "60"
+}
+
+down = {
+    "schemaVersion": 1,
+    "label": "uptime",
+    "message": "down",
+    "color": "critical",
+    "style": "flat-square",
+    "cacheSeconds": "60"
+}
+
 
 @app.get("/", response_model=dict)
 async def check_proxy_status(request: Request):
@@ -14,9 +32,9 @@ async def check_proxy_status(request: Request):
                 return {"error": "Internal Server Error"}
             response = await client.get(url)
             response.raise_for_status()
-        return {"status": "up"}
+        return up
     except httpx.RequestError:
-        return {"status": "down"}
+        return down
     except Exception as e:
         print(f"{e}")
-        return {"status": "up"}
+        return up
