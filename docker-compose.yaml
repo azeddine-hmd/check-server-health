@@ -1,0 +1,9 @@
+version: '3'
+services:
+  app:
+    build: .
+    container_name: check-server-health
+    ports:
+      - "8383:8383"
+    volumes:
+      - ./:/app
