@@ -1,2 +1,3 @@
 # check-server-health
-lighweight server to check server responsiveness and response with json
+Lightweight server to assess server responsiveness and reply with JSON compatible with Shields.io badge payload.
+For more see: ![Shields Badges](https://shields.io/badges/dynamic-json-badge)
