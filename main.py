@@ -8,10 +8,10 @@ app = FastAPI()
 async def check_proxy_status(request: Request):
     try:
         async with httpx.AsyncClient() as client:
-            if request.headers.get("Host") == "localhost:8383":
-                return {"error": "you can't check health on yourself"}
-            url = f"http://{request.headers.get('Host')}"
-            print(f"url: {url}")
+            url = f"{request.headers.get('X-Forwarded-Proto')}://{request.headers.get('Host')}"
+            print(f"checking server {url} health...")
+            if url == "http://localhost:8383":
+                return {"error": "Internal Server Error"}
             response = await client.get(url)
             response.raise_for_status()
         return {"status": "up"}
