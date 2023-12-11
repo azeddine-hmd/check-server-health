@@ -7,3 +7,4 @@ services:
       - "8383:8383"
     volumes:
       - ./:/app
+    network_mode: "host"
